@@ -49,7 +49,11 @@
                 <i class="far fa-calendar-alt"></i>
                 <span>Jadwal Ujian</span></a>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url() ?>Dashboard/bank_soal">
+                <i class="far fa-calendar-alt"></i>
+                <span>Bank Soal</span></a>
+        </li>
         <!-- Divider -->
         <!-- <hr class="sidebar-divider"> -->
 

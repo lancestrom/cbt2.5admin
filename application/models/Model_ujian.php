@@ -100,6 +100,21 @@ WHERE a_jadwal.id_jadwal='$id_jadwal' AND a_siswa.username='$sess';";
         return $query->result_array();
     }
 
+    public function simpanBankSoalTemp()
+    {
+        $sql = "SELECT bank_soal_temp.id_bank_soal_temp,bank_soal_temp.nama_bank_soal FROM `bank_soal_temp`;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function HeadersimpanBankSoalTemp($id_bank_soal_temp)
+    {
+        $sql = "SELECT bank_soal_temp.id_bank_soal_temp,bank_soal_temp.nama_bank_soal FROM `bank_soal_temp`
+WHERE bank_soal_temp.id_bank_soal_temp='$id_bank_soal_temp';";
+        $query = $this->db->query($sql);
+        return $query->row_array();
+    }
+
 
     function simpan($data = array())
     {
@@ -107,6 +122,15 @@ WHERE a_jadwal.id_jadwal='$id_jadwal' AND a_siswa.username='$sess';";
 
         if ($jumlah > 0) {
             $this->db->insert_batch('soal', $data);
+        }
+    }
+
+    function simpanBankSoal($data = array())
+    {
+        $jumlah = count($data);
+
+        if ($jumlah > 0) {
+            $this->db->insert_batch('bank_soal', $data);
         }
     }
 }
