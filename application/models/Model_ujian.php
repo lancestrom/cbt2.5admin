@@ -102,7 +102,10 @@ WHERE a_jadwal.id_jadwal='$id_jadwal' AND a_siswa.username='$sess';";
 
     public function simpanBankSoalTemp()
     {
-        $sql = "SELECT bank_soal_temp.id_bank_soal_temp,bank_soal_temp.nama_bank_soal FROM `bank_soal_temp`;";
+        $sql = "SELECT bank_soal_temp.id_bank_soal_temp,bank_soal_temp.nama_bank_soal,IF(COUNT(bank_soal.id_bank_soal)>0,COUNT(*),0) as jumlah_soal FROM `bank_soal`
+RIGHT JOIN bank_soal_temp
+ON bank_soal.id_bank_soal_temp=bank_soal_temp.id_bank_soal_temp
+GROUP BY bank_soal.id_bank_soal_temp;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

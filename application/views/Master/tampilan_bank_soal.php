@@ -29,6 +29,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">ID BANK SOAL </th>
                                 <th scope="col">NAMa BANK SOAL</th>
+                                <th scope="col">jumlah soal</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -41,10 +42,12 @@
                                     <td><?php echo $no++; ?></td>
                                     <td class="text-center"><?= $row['id_bank_soal_temp'] ?></td>
                                     <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
+                                    <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
                                     <td>
                                         <h5 class="text-center">
                                             <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder" href="<?= base_url() ?>Dashboard/upload_banksoal_temp/<?= $row['id_bank_soal_temp'] ?>">UPLOAD</a>
                                             <a class="btn btn-success btn-sm text-uppercase font-weight-bolder" href="<?= base_url() ?>Dashboard/detail_banksoal_temp/<?= $row['id_bank_soal_temp'] ?>">DETAIL</a>
+                                            <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder" href="<?= base_url() ?>Dashboard/hapus_banksoal_temp/<?= $row['id_bank_soal_temp'] ?>">HAPUS</a>
                                         </h5>
                                     </td>
                             </tr>
