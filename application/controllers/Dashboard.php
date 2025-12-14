@@ -523,6 +523,19 @@ class Dashboard extends CI_Controller
         }
     }
 
+    public function detail_jadwal_soal($id_jadwal)
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
+        $isi['jadwal_soal'] = $this->Model_ujian->jadwalSoal_bankSoal($id_jadwal);
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'Master/tampilan_detail_jadwal_soal';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
     public function detail_soal($id_jadwal)
     {
         $this->Model_keamanan->getKeamanan();

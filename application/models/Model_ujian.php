@@ -156,6 +156,24 @@ GROUP BY bank_soal.id_bank_soal;";
         return $query->result_array();
     }
 
+    public function jadwalSoal_bankSoal($id_jadwal)
+    {
+        $sql = "SELECT a_jadwal.id_jadwal,a_jadwal.id_mapel,jadwal_soal.id_bank_soal,a_mapel.nama_mapel,
+soal.soal,soal.pilA,soal.pilB,soal.pilC,soal.pilD,soal.pilE,soal.kunci
+FROM `jadwal_soal`
+INNER JOIN a_jadwal
+ON jadwal_soal.id_jadwal=a_jadwal.id_jadwal
+INNER JOIN a_mapel
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+INNER JOIN bank_soal
+ON jadwal_soal.id_bank_soal=bank_soal.id_bank_soal
+INNER JOIN soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+WHERE a_jadwal.id_jadwal='$id_jadwal';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
 
     function simpan($data = array())
     {
