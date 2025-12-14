@@ -533,7 +533,7 @@ class Dashboard extends CI_Controller
     public function bank_soal()
     {
         $this->Model_keamanan->getKeamanan();
-        $isi['bank_soal'] = $this->Model_ujian->simpanBankSoalTemp();
+        // $isi['bank_soal'] = $this->Model_ujian->simpanBankSoalTemp();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_bank_soal';

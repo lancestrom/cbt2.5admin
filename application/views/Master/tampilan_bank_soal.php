@@ -18,7 +18,7 @@
 
 
 
-<div class="row mt-2">
+<!-- <div class="row mt-2">
     <div class="col-md">
         <div class="card">
             <div class="card-body">
@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
