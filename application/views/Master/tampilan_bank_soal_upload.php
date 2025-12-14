@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body bg-info text-white">
                 <h5 class="text-uppercase">
-                    ID : <?= $header['id_bank_soal_temp'] ?>
+                    ID : <?= $header['id_bank_soal'] ?>
                 </h5>
             </div>
         </div>

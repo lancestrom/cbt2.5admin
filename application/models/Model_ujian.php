@@ -110,12 +110,19 @@ GROUP BY bank_soal.id_bank_soal_temp;";
         return $query->result_array();
     }
 
-    public function HeadersimpanBankSoalTemp($id_bank_soal_temp)
+    public function HeadersimpanBankSoalTemp($id_bank_soal)
     {
-        $sql = "SELECT bank_soal_temp.id_bank_soal_temp,bank_soal_temp.nama_bank_soal FROM `bank_soal_temp`
-WHERE bank_soal_temp.id_bank_soal_temp='$id_bank_soal_temp';";
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal FROM `bank_soal`
+WHERE bank_soal.id_bank_soal='$id_bank_soal';";
         $query = $this->db->query($sql);
         return $query->row_array();
+    }
+
+    public function namaBankSoal()
+    {
+        $sql = "SELECT * FROM `bank_soal`";
+        $query = $this->db->query($sql);
+        return $query->result_array();
     }
 
 
@@ -133,7 +140,7 @@ WHERE bank_soal_temp.id_bank_soal_temp='$id_bank_soal_temp';";
         $jumlah = count($data);
 
         if ($jumlah > 0) {
-            $this->db->insert_batch('bank_soal', $data);
+            $this->db->insert_batch('soal', $data);
         }
     }
 }

@@ -533,7 +533,7 @@ class Dashboard extends CI_Controller
     public function bank_soal()
     {
         $this->Model_keamanan->getKeamanan();
-        // $isi['bank_soal'] = $this->Model_ujian->simpanBankSoalTemp();
+        $isi['bank_soal'] = $this->Model_ujian->namaBankSoal();
 
         $isi2['title'] = 'CBT | Administrator';
         $isi['content'] = 'Master/tampilan_bank_soal';
@@ -542,15 +542,15 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function hapus_banksoal_temp($id_bank_soal_temp)
+    public function hapus_banksoal($id_bank_soal_temp)
     {
         $this->Model_keamanan->getKeamanan();
 
-        $this->db->where('id_bank_soal_temp', $id_bank_soal_temp);
-        $this->db->delete('bank_soal_temp');
-
-        $this->db->where('id_bank_soal_temp', $id_bank_soal_temp);
+        $this->db->where('id_bank_soal', $id_bank_soal_temp);
         $this->db->delete('bank_soal');
+
+        $this->db->where('id_bank_soal', $id_bank_soal_temp);
+        $this->db->delete('soal');
 
 
         $this->session->set_flashdata('pesan', '<div class="row">
@@ -572,11 +572,11 @@ class Dashboard extends CI_Controller
         $this->Model_keamanan->getKeamanan();
 
         $data = array(
-            'id_bank_soal_temp' => rand(11111111, 99999999),
+            'id_bank_soal' => rand(11111111, 99999999),
             'nama_bank_soal' => $this->input->post('nama_bank_soal', TRUE)
         );
 
-        $this->db->insert('bank_soal_temp', $data);
+        $this->db->insert('bank_soal', $data);
         $this->session->set_flashdata('pesan', '<div class="row">
         <div class="col-md mt-2">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -591,13 +591,13 @@ class Dashboard extends CI_Controller
         redirect('Dashboard/bank_soal');
     }
 
-    public function upload_banksoal_temp($id_bank_soal_temp)
+    public function upload_banksoal($id_bank_soal_temp)
     {
         $this->Model_keamanan->getKeamanan();
         $isi['header'] = $this->Model_ujian->HeadersimpanBankSoalTemp($id_bank_soal_temp);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'Master/tampilan_bank_soal_temp';
+        $isi['content'] = 'Master/tampilan_bank_soal_upload';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
@@ -623,7 +623,7 @@ class Dashboard extends CI_Controller
                 foreach ($reader->getSheetIterator() as $sheet) {
                     $numRow = 1;
                     $save   = array();
-                    $id_random = rand(11111111, 99999999);
+                    // $id_random = rand(11111111, 99999999);
                     foreach ($sheet->getRowIterator() as $row) {
 
                         if ($numRow > 1) {
@@ -632,16 +632,15 @@ class Dashboard extends CI_Controller
 
                             // Extract cell values safely (cast to string and trim)
                             $data = array(
-
-                                'id_bank_soal'   => isset($cells[0]) ? trim((string)$cells[0]->getValue()) : null,
-                                'id_bank_soal_temp' => isset($cells[1]) ? trim((string)$cells[1]->getValue()) : null,
-                                'soal'      => isset($cells[2]) ? trim((string)$cells[2]->getValue()) : null,
-                                'pilA'       => isset($cells[3]) ? trim((string)$cells[3]->getValue()) : null,
-                                'pilB'       => isset($cells[4]) ? trim((string)$cells[4]->getValue()) : null,
-                                'pilC'       => isset($cells[5]) ? trim((string)$cells[5]->getValue()) : null,
-                                'pilD'       => isset($cells[6]) ? trim((string)$cells[6]->getValue()) : null,
-                                'pilE'       => isset($cells[7]) ? trim((string)$cells[7]->getValue()) : null,
-                                'kunci'     => isset($cells[8]) ? trim((string)$cells[8]->getValue()) : null,
+                                'id_soal'              => $cells[0],
+                                'id_bank_soal'     => $cells[1],
+                                'soal'            => $cells[2],
+                                 'soal'            => $cells[2],
+                                  'soal'            => $cells[2],
+                                   'soal'            => $cells[2],
+                                    'soal'            => $cells[2],
+                                     'soal'            => $cells[2],
+                                      'soal'            => $cells[2],
                             );
                             array_push($save, $data);
                         }

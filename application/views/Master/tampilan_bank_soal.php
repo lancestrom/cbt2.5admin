@@ -18,7 +18,7 @@
 
 
 
-<!-- <div class="row mt-2">
+<div class="row mt-2">
     <div class="col-md">
         <div class="card">
             <div class="card-body">
@@ -29,7 +29,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">ID BANK SOAL </th>
                                 <th scope="col">NAMa BANK SOAL</th>
-                                <th scope="col">jumlah soal</th>
+                                <!-- <th scope="col">jumlah soal</th> -->
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -40,16 +40,16 @@
                                 foreach ($bank_soal as $row) {
                                 ?>
                                     <td><?php echo $no++; ?></td>
-                                    <td class="text-center"><?= $row['id_bank_soal_temp'] ?></td>
+                                    <td class="text-center"><?= $row['id_bank_soal'] ?></td>
                                     <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
-                                    <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
+                                    <!-- <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td> -->
                                     <td>
                                         <h5 class="text-center">
-                                            <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder" href="<?= base_url() ?>Dashboard/upload_banksoal_temp/<?= $row['id_bank_soal_temp'] ?>">UPLOAD</a>
-                                            <a class="btn btn-success btn-sm text-uppercase font-weight-bolder" href="<?= base_url() ?>Dashboard/detail_banksoal_temp/<?= $row['id_bank_soal_temp'] ?>">DETAIL</a>
-                                            <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder" href="<?= base_url() ?>Dashboard/hapus_banksoal_temp/<?= $row['id_bank_soal_temp'] ?>">HAPUS</a>
+                                            <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder" href="<?= base_url() ?>Dashboard/upload_banksoal/<?= $row['id_bank_soal'] ?>">UPLOAD</a>
+                                            <a class="btn btn-success btn-sm text-uppercase font-weight-bolder" href="<?= base_url() ?>Dashboard/detail_banksoal<?= $row['id_bank_soal'] ?>">DETAIL</a>
+                                            <a class="btn btn-danger btn-sm text-uppercase font-weight-bolder" href="<?= base_url() ?>Dashboard/hapus_banksoal/<?= $row['id_bank_soal'] ?>">HAPUS</a>
                                         </h5>
-                                    </td>
+                                    </td>≈
                             </tr>
                         <?php } ?>
                         </tbody>
@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
