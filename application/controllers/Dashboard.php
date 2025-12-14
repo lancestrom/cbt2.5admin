@@ -393,6 +393,47 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function pilih_soal($id_jadwal)
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
+        $isi['bank_soal'] = $this->Model_ujian->pilihBankSoal();
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'Master/tampilan_pilih_soal';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
+    public function simpan_pilih_soal()
+    {
+        $id_jadwal_soal = rand(11111111, 99999999);
+        $id_jadwal = $this->input->post_get('id_jadwal');
+        $id_bank_soal = $this->input->post_get('id_bank_soal');
+
+        $data = array(
+            'id_jadwal_soal' => $id_jadwal_soal,
+            'id_jadwal ' => $id_jadwal,
+            'id_bank_soal' => $id_bank_soal
+        );
+
+        $this->db->insert('jadwal_soal', $data);
+        $this->session->set_flashdata('pesan', '<div class="row">
+        <div class="col-md mt-2">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>Jadwal Soal Berhasil Di Tambah</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        </div>
+        </div>');
+
+        redirect('Dashboard/jadwal_ujian');
+    }
+
     public function hapus_all_jadwal()
     {
         $this->Model_keamanan->getKeamanan();
@@ -422,6 +463,8 @@ class Dashboard extends CI_Controller
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');
     }
+
+
 
     public function upload_bank_soal()
     {

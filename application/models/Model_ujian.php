@@ -146,6 +146,16 @@ WHERE bank_soal.id_bank_soal='$id_bank_soal';";
         return $query->result_array();
     }
 
+    public function pilihBankSoal()
+    {
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,count(bank_soal.id_bank_soal) AS jumlah_soal FROM `soal`
+INNER JOIN bank_soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+GROUP BY bank_soal.id_bank_soal;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
 
     function simpan($data = array())
     {
