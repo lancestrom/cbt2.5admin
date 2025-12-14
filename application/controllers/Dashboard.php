@@ -468,7 +468,7 @@ class Dashboard extends CI_Controller
                     }
                     $this->Model_ujian->simpan($save);
                     $reader->close();
-                 
+
                     unlink('temp_doc/' . $file['file_name']);
                     $this->session->set_flashdata('pesan', '<div class="alert alert-success">Soal berhasil diunggah</div>');
                     redirect('Dashboard/bank_soal');
@@ -601,15 +601,16 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-   
 
-    public function detail_banksoal_temp($id_bank_soal_temp)
+
+    public function detail_banksoal($id_bank_soal)
     {
         $this->Model_keamanan->getKeamanan();
-        $isi['header'] = $this->Model_ujian->HeadersimpanBankSoalTemp($id_bank_soal_temp);
+        $isi['header'] = $this->Model_ujian->headerBankSoal($id_bank_soal);
+        $isi['soal'] = $this->Model_ujian->detailBankSoal($id_bank_soal);
 
         $isi2['title'] = 'CBT | Administrator';
-        $isi['content'] = 'Master/tampilan_detail_bank_soal_temp';
+        $isi['content'] = 'Master/tampilan_detail_bank_soal';
         $this->load->view('templates/header', $isi2);
         $this->load->view('tampilan_dashboard', $isi);
         $this->load->view('templates/footer');

@@ -128,6 +128,24 @@ GROUP BY bank_soal.id_bank_soal;";
         return $query->result_array();
     }
 
+    public function headerBankSoal($id_bank_soal)
+    {
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal FROM `bank_soal`
+WHERE bank_soal.id_bank_soal='$id_bank_soal';";
+        $query = $this->db->query($sql);
+        return $query->row_array();
+    }
+
+    public function detailBankSoal($id_bank_soal)
+    {
+        $sql = "SELECT soal.* FROM `soal`
+INNER JOIN bank_soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+WHERE bank_soal.id_bank_soal='$id_bank_soal';";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
 
     function simpan($data = array())
     {
@@ -138,12 +156,12 @@ GROUP BY bank_soal.id_bank_soal;";
         }
     }
 
-    function simpanBankSoal($data = array())
-    {
-        $jumlah = count($data);
+    // function simpanBankSoal($data = array())
+    // {
+    //     $jumlah = count($data);
 
-        if ($jumlah > 0) {
-            $this->db->insert_batch('soal', $data);
-        }
-    }
+    //     if ($jumlah > 0) {
+    //         $this->db->insert_batch('soal', $data);
+    //     }
+    // }
 }
