@@ -29,7 +29,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">ID BANK SOAL </th>
                                 <th scope="col">NAMa BANK SOAL</th>
-                                <!-- <th scope="col">jumlah soal</th> -->
+                                <th scope="col">jumlah soal</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -42,7 +42,7 @@
                                     <td><?php echo $no++; ?></td>
                                     <td class="text-center"><?= $row['id_bank_soal'] ?></td>
                                     <td class="text-center"><?= $row['nama_bank_soal'] ?></td>
-                                    <!-- <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td> -->
+                                    <td class="text-center"><?= $row['jumlah_soal'] ?> Soal</td>
                                     <td>
                                         <h5 class="text-center">
                                             <a class="btn btn-primary btn-sm text-uppercase font-weight-bolder" href="<?= base_url() ?>Dashboard/upload_banksoal/<?= $row['id_bank_soal'] ?>">UPLOAD</a>

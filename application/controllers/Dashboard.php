@@ -423,7 +423,7 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function upload_soal_jadwal()
+    public function upload_bank_soal()
     {
         // protect the upload endpoint
         if ($this->input->post('submit', TRUE) == 'upload') {
@@ -452,15 +452,15 @@ class Dashboard extends CI_Controller
 
                             // Extract cell values safely (cast to string and trim)
                             $data = array(
-                                'id_soal'   => isset($cells[0]) ? trim((string)$cells[0]->getValue()) : null,
-                                'id_jadwal' => isset($cells[1]) ? trim((string)$cells[1]->getValue()) : null,
-                                'soal'      => isset($cells[2]) ? trim((string)$cells[2]->getValue()) : null,
-                                'pilA'       => isset($cells[3]) ? trim((string)$cells[3]->getValue()) : null,
-                                'pilB'       => isset($cells[4]) ? trim((string)$cells[4]->getValue()) : null,
-                                'pilC'       => isset($cells[5]) ? trim((string)$cells[5]->getValue()) : null,
-                                'pilD'       => isset($cells[6]) ? trim((string)$cells[6]->getValue()) : null,
-                                'pilE'       => isset($cells[7]) ? trim((string)$cells[7]->getValue()) : null,
-                                'kunci'     => isset($cells[8]) ? trim((string)$cells[8]->getValue()) : null,
+                                'id_soal'   => $cells[0],
+                                'id_bank_soal' => $cells[1],
+                                'soal'      => $cells[2],
+                                'pilA'       => $cells[3],
+                                'pilB'       => $cells[4],
+                                'pilC'       => $cells[5],
+                                'pilD'       => $cells[6],
+                                'pilE'       => $cells[7],
+                                'kunci'     => $cells[8],
                             );
                             array_push($save, $data);
                         }
@@ -468,16 +468,14 @@ class Dashboard extends CI_Controller
                     }
                     $this->Model_ujian->simpan($save);
                     $reader->close();
-                    $tmpPath = 'temp_doc/' . $file['file_name'];
-                    if (is_file($tmpPath)) {
-                        @unlink($tmpPath);
-                    }
+                 
+                    unlink('temp_doc/' . $file['file_name']);
                     $this->session->set_flashdata('pesan', '<div class="alert alert-success">Soal berhasil diunggah</div>');
-                    redirect('Dashboard/jadwal_ujian');
+                    redirect('Dashboard/bank_soal');
                 }
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger">Upload error: ' . strip_tags($this->upload->display_errors()) . '</div>');
-                redirect('Dashboard/jadwal_ujian');
+                redirect('Dashboard/bank_soal');
             }
         }
     }
@@ -603,64 +601,7 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function upload_bank_soal()
-    {
-        // protect the upload endpoint
-        if ($this->input->post('submit', TRUE) == 'upload') {
-            $config['upload_path']      = './temp_doc/';
-            $config['allowed_types']    = 'xlsx|xls';
-            $config['file_name']        = 'doc' . time();
-
-            $this->load->library('upload', $config);
-
-            if ($this->upload->do_upload('excel')) {
-                $file   = $this->upload->data();
-
-                $reader = ReaderEntityFactory::createXLSXReader();
-                $reader->open('temp_doc/' . $file['file_name']);
-
-
-                foreach ($reader->getSheetIterator() as $sheet) {
-                    $numRow = 1;
-                    $save   = array();
-                    // $id_random = rand(11111111, 99999999);
-                    foreach ($sheet->getRowIterator() as $row) {
-
-                        if ($numRow > 1) {
-
-                            $cells = $row->getCells();
-
-                            // Extract cell values safely (cast to string and trim)
-                            $data = array(
-                                'id_soal'              => $cells[0],
-                                'id_bank_soal'     => $cells[1],
-                                'soal'            => $cells[2],
-                                 'soal'            => $cells[2],
-                                  'soal'            => $cells[2],
-                                   'soal'            => $cells[2],
-                                    'soal'            => $cells[2],
-                                     'soal'            => $cells[2],
-                                      'soal'            => $cells[2],
-                            );
-                            array_push($save, $data);
-                        }
-                        $numRow++;
-                    }
-                    $this->Model_ujian->simpanBankSoal($save);
-                    $reader->close();
-                    $tmpPath = 'temp_doc/' . $file['file_name'];
-                    if (is_file($tmpPath)) {
-                        @unlink($tmpPath);
-                    }
-                    $this->session->set_flashdata('pesan', '<div class="alert alert-success">Soal berhasil diunggah</div>');
-                    redirect('Dashboard/bank_soal');
-                }
-            } else {
-                $this->session->set_flashdata('pesan', '<div class="alert alert-danger">Upload error: ' . strip_tags($this->upload->display_errors()) . '</div>');
-                redirect('Dashboard/bank_soal');
-            }
-        }
-    }
+   
 
     public function detail_banksoal_temp($id_bank_soal_temp)
     {

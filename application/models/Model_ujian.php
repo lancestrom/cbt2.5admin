@@ -120,7 +120,10 @@ WHERE bank_soal.id_bank_soal='$id_bank_soal';";
 
     public function namaBankSoal()
     {
-        $sql = "SELECT * FROM `bank_soal`";
+        $sql = "SELECT bank_soal.id_bank_soal,bank_soal.nama_bank_soal,IF(COUNT(*)>0,count(soal.soal),'0') AS jumlah_soal FROM `soal`
+RIGHT JOIN bank_soal
+ON bank_soal.id_bank_soal=soal.id_bank_soal
+GROUP BY bank_soal.id_bank_soal;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }
