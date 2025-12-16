@@ -672,6 +672,19 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function rekap_nilai()
+    {
+        $this->Model_keamanan->getKeamanan();
+        // $isi['ujian'] = $this->Model_ujian->uploadSoalID($id_jadwal);
+        $isi['rekap'] = $this->Model_ujian->rekap_nilai_mapel();
+
+        $isi2['title'] = 'CBT | Administrator';
+        $isi['content'] = 'Master/tampilan_rekap_nilai';
+        $this->load->view('templates/header', $isi2);
+        $this->load->view('tampilan_dashboard', $isi);
+        $this->load->view('templates/footer');
+    }
+
     public function logout()
     {
         $this->session->sess_destroy();

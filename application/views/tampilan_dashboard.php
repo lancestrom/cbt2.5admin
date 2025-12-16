@@ -28,7 +28,8 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-align-justify"></i>
                 <span>Data Master</span>
             </a>
@@ -55,30 +56,32 @@
                 <span>Bank Soal</span></a>
         </li>
         <!-- Divider -->
-        <!-- <hr class="sidebar-divider"> -->
+        <hr class="sidebar-divider">
 
-        <!-- Heading -->
-        <!-- <div class="sidebar-heading">
+
+        <div class="sidebar-heading">
             Ujian
         </div>
 
-        Nav Item - Pages Collapse Menu
+
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                aria-expanded="true" aria-controls="collapsePages">
                 <i class="far fa-file-alt"></i>
                 <span>Ujian Berbasis Komputer</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?= base_url() ?>Dashboard/akun_peserta">Akun Peserta</a>
+                    <!-- <a class="collapse-item" href="<?= base_url() ?>Dashboard/akun_peserta">Akun Peserta</a>
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/status_ujian">Status Ujian</a>
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/status_peserta_login">Status Login</a>
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/status_peserta">Status Peserta</a>
-                    <a class="collapse-item" href="<?= base_url() ?>Dashboard/filter_status_peserta">Filter Status Peserta</a>
+                    <a class="collapse-item" href="<?= base_url() ?>Dashboard/filter_status_peserta">Filter Status
+                        Peserta</a> -->
                     <a class="collapse-item" href="<?= base_url() ?>Dashboard/rekap_nilai">Cetak Daftar Nilai</a>
                 </div>
             </div>
-        </li> -->
+        </li>
 
         <hr class="sidebar-divider">
         <!-- Heading -->

@@ -174,6 +174,23 @@ WHERE a_jadwal.id_jadwal='$id_jadwal';";
         return $query->result_array();
     }
 
+    public function rekap_nilai_mapel()
+    {
+        $sql = "SELECT a_kelas.id,a_mapel.id_mapel,a_mapel.nama_mapel
+FROM `siswa_jawab`
+INNER JOIN soal
+ON siswa_jawab.soal_id=soal.id_soal
+INNER JOIN a_siswa
+ON siswa_jawab.username=a_siswa.username
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+INNER JOIN a_mapel
+ON a_mapel.id_kelas=a_kelas.id
+GROUP BY a_mapel.id_mapel;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
 
     function simpan($data = array())
     {
