@@ -27,7 +27,8 @@
                                     <td>
                                         <h5 class="text-center">
                                             <a class="btn btn-danger text-white btn-sm text-uppercase font-weight-bolder"
-                                                href="">Print
+                                                href="<?= base_url()  ?>Dashboard/print_nilai/<?= $row['id_jadwal'] ?>"
+                                                target="_blank">Print
                                             </a>
                                         </h5>
                                     </td>

@@ -176,7 +176,7 @@ WHERE a_jadwal.id_jadwal='$id_jadwal';";
 
     public function rekap_nilai_mapel()
     {
-        $sql = "SELECT a_kelas.id,a_mapel.id_mapel,a_mapel.nama_mapel
+        $sql = "SELECT a_kelas.id,a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel
 FROM `siswa_jawab`
 INNER JOIN soal
 ON siswa_jawab.soal_id=soal.id_soal
@@ -186,7 +186,53 @@ INNER JOIN a_kelas
 ON a_siswa.kelas=a_kelas.slug
 INNER JOIN a_mapel
 ON a_mapel.id_kelas=a_kelas.id
+INNER JOIN a_jadwal
+ON a_jadwal.id_mapel=a_mapel.id_mapel
 GROUP BY a_mapel.id_mapel;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function header_print_nilai($id_jadwal)
+    {
+        $sql = "SELECT a_kelas.id,a_mapel.id_mapel,a_jadwal.id_jadwal,a_mapel.nama_mapel
+FROM `siswa_jawab`
+INNER JOIN soal
+ON siswa_jawab.soal_id=soal.id_soal
+INNER JOIN a_siswa
+ON siswa_jawab.username=a_siswa.username
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+INNER JOIN a_mapel
+ON a_mapel.id_kelas=a_kelas.id
+INNER JOIN a_jadwal
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_jadwal.id_jadwal='$id_jadwal'
+GROUP BY a_mapel.id_mapel;";
+        $query = $this->db->query($sql);
+        return $query->row_array();
+    }
+
+    public function print_nilai($id_jadwal)
+    {
+        $sql = "SELECT a_jadwal.id_jadwal,a_siswa.username,a_siswa.nama_siswa,a_kelas.kelas,
+SUM(CASE WHEN siswa_jawab.jawaban=soal.kunci THEN 1 ELSE 0 END) AS benar,
+SUM(CASE WHEN siswa_jawab.jawaban=soal.kunci THEN 0 ELSE 1 END) AS salah,
+COUNT(soal.soal)as jumlah_soal,
+FLOOR(((SUM(CASE WHEN siswa_jawab.jawaban=soal.kunci THEN 1 ELSE 0 END))/(COUNT(*)))*100) as nilai
+FROM `siswa_jawab`
+INNER JOIN soal
+ON siswa_jawab.soal_id=soal.id_soal
+INNER JOIN a_siswa
+ON siswa_jawab.username=a_siswa.username
+INNER JOIN a_kelas
+ON a_siswa.kelas=a_kelas.slug
+INNER JOIN a_mapel
+ON a_mapel.id_kelas=a_kelas.id
+INNER JOIN a_jadwal
+ON a_jadwal.id_mapel=a_mapel.id_mapel
+WHERE a_jadwal.id_jadwal='$id_jadwal'
+GROUP BY a_siswa.username;";
         $query = $this->db->query($sql);
         return $query->result_array();
     }

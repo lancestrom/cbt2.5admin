@@ -685,6 +685,14 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function print_nilai($id_jadwal)
+    {
+        $this->Model_keamanan->getKeamanan();
+        $isi['header'] = $this->Model_ujian->header_print_nilai($id_jadwal);
+        $isi['nilai'] = $this->Model_ujian->print_nilai($id_jadwal);
+        $this->load->view('Master/tampilan_print_nilai', $isi);
+    }
+
     public function logout()
     {
         $this->session->sess_destroy();
