@@ -1,4 +1,48 @@
+# Enable rewrite engine
+
 RewriteEngine On
+
+# ------------------------------
+
+# FORCE HTTPS
+
+# If you want to force HTTPS site-wide, uncomment the following block.
+
+# This redirects all http requests to https preserving the host and URI.
+
+# ------------------------------
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ------------------------------
+
+# Remove index.php from URLs (CodeIgniter 3)
+
+# Make sure AllowOverride All is enabled in Apache config for this directory.
+
+# If your project is in a subfolder, set RewriteBase accordingly, e.g.
+
+# RewriteBase /cbt2.5admin/
+
+# ------------------------------
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php/$1 [L]
+RewriteRule ^(.\*)$ index.php/$1 [L]
+
+# Optional: prevent access to system and application directories via web
+
+<IfModule mod_authz_core.c>
+	<FilesMatch "^(system|application)(/|$)">
+		Require all denied
+	</FilesMatch>
+</IfModule>
+
+# Optional security headers (can be adjusted/removed if unwanted)
+
+<IfModule mod_headers.c>
+	Header always set X-Frame-Options "SAMEORIGIN"
+	Header always set X-Content-Type-Options "nosniff"
+	Header always set Referrer-Policy "no-referrer-when-downgrade"
+</IfModule>
