@@ -7,7 +7,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.1.10',
+	'hostname' => '192.168.1.59',
 	'username' => 'cbt',
 	'password' => 'smktkjTH46',
 	'database' => 'cbtonline_db',
