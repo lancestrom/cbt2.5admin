@@ -23,7 +23,7 @@ $config['time_reference'] = 'Asia/Jakarta';
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://192.168.1.59/cbt2.0admin/';
+$config['base_url'] = 'http://192.168.1.59/cbt2.5admin';
 
 // $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
 // $config['base_url'] .= "://" . $_SERVER['HTTP_HOST'];
